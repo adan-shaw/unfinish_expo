@@ -1,0 +1,67 @@
+//111111111111111111111111111111111111111111111111111111111111111111111111
+//格式测试:
+//邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵邵
+//起始日期:
+//完成日期:
+//************************************************************************
+//修改日志:
+
+//, , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , , ,, , ,
+
+
+0.cJSON 版本:
+	cJSON-master.zip是编译安装版本,有.so共享库'共享内存',减少内存消耗.
+
+	cJSON源码阅读版_静态编译版.tar.gz是源码阅读, 只能静态编译. 
+
+
+
+1.解压cJSON-master.zip 压缩包
+	移动到/home/adan/Public 下, 然后直接make all
+
+	切换root 权限, make install.
+	默认安装路径是: /usr/local
+	默认头文件存放路径是: /usr/local/include/cjson
+	默认so 共享库头文件存放路径是: /usr/local/lib
+
+	ps: gcc 会默认搜索: /usr/include /usr/local/include
+
+
+
+2.此时, cjson 虽然可以被编译, 
+	因为头文件已经安装到: /usr/local/include/cjson 下了,
+	并且cjson 运行时库, 也已经移交/usr/local/lib 了. 
+	但你仍然需要ldconfig 更新一下运行时库, 才能找到cjson 运行时库.
+	详情你需要了解一下kernel 的'内核共享库'装载机制.
+
+	ldconfig 的意思就是重新'检查/装载'c 运行时库.
+	类似glibc.so.6 运行时库, cjson 也是用共享内存来节省内存,
+	除非你使用Os 静态编译.
+	静态编译就可以不用cjson 运行时库.
+
+	只要使用到运行时库, 一般外部的运行时库
+	(非C/C++ 标准运行时库, 统一都需要使用-l 编译选项添加)
+	C/C++ 标准运行时库 = glibc.so.6, 开机已经载入, 无需再次载入.
+	如果不载入.so 运行时库, 编译器会找不到代码实现的.
+	就算编译出来也跑不了, 就像你删掉glibc.so.6 一样,
+	linux 系统大部分的程序不能用了.
+	因为linux 本身就是gcc 编译出来的内核, 也会用到glibc.so.6 节约内存.
+
+
+
+3.头文件在: /usr/local/include/cjson/cJSON.h,
+	所以可以直接: #include <cjson/cJSON.h>
+	头文件已经附带了: extern "C"{}, 
+	不需要再次包含转化了, cjson 本身兼容c++
+	cjson 编译选项：< -l cjson >
+
+
+
+4.cJSON 阅读版:
+	cJSON.h: cjson 的定义细节
+	cJSON.c: cjson 的实现细节
+
+	注意:	目前这套cjson 都是DaveGamble 搞出来的, 所以不用怀疑兼容性.
+				github: https://github.com/DaveGamble/cJSON
+
+

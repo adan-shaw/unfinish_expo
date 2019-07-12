@@ -1,0 +1,23 @@
+1.如何安装使用openssl:
+	# openssl 的‘二进制实现库’, ‘编程库’, ‘文档’
+	apt-get install openssl libssl-dev libssl-doc 
+
+	或者你可以选择tarball: 
+		openssl.org 官网在US, 速度很慢, 
+		但是你可以上github 上面下载一个openssl 的实现版本.
+
+	tarball:
+		下载解压, 然后运行: 
+		./config #不是./configure, openssl的配置引导文件变了,无伤大雅
+		make
+		make install
+		
+	安装之后, 最好更新一下所有.so 动态链接库的配置:
+		ldconfig
+	因为tarball安装之后, 不更新, 可能找不到openssl 的关键.so 库
+
+
+
+2.openssl 中, crypto 库的使用demo:
+	详情请查看openssl-crypto-demo
+	编译选项: -lcrypto

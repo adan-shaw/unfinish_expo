@@ -1,0 +1,3 @@
+>>SimpleIni.h 不需要安装, 包含头文件SimpleIni.h 就可以直接用.
+	(意味着simpleini 是静态编译的, 内存消耗有点大, 不可经常用.)
+	例子自己看simple_ini_test.h simple_ini_test.cpp

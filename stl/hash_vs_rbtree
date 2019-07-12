@@ -1,0 +1,20 @@
+<哈希>
+哈系类关联容器, 提供无序快速查找(均摊O(1), 最坏情况O(n)的复杂度).
+可以减少增删操作带来的排序损耗, 但是查找效率不稳定.
+
+
+<红黑树>
+基于红黑树实现的map 集合功能, 是一种有序关联容器.
+提供快速查找, 较快的增删速度(查找复杂度: O(log n) )
+
+
+<综合>
+哈希不适合使用<聚合函数操作>, 尽量做简单存储, 查找, 删除. 
+同时哈希需要牺牲较多的内存, 红黑树则相反.
+
+
+详情请看: https://zh.cppreference.com/w/cpp/container
+unordered_set
+unordered_map
+unordered_multiset
+unordered_multimap

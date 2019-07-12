@@ -1,0 +1,45 @@
+//主要是做<结构体链表>
+//做一个fd_max 链表, 就是2 的16 次方大小. 
+//用来下表索引查找: 
+//静态变量. 
+
+
+//这样可以快速查找？？？
+//但是如果客户端已经断开, 你就有可能碰到控制指针. 
+//
+//不知道try 能不能对付空指针, try 还是不能处理空指针, 废物！！
+
+
+
+typedef struct linklist_element{//链表元素
+  bool isUsing;
+  
+  ll_elem_t* next;
+}ll_elem_t;
+
+//sysctl fs.file-max=655360可以调整内核的阈值, 所以定义一个max = 65536 的数组容器是幼稚的
+#ifndef __linklist_pool
+#define __linklist_pool 1
+
+//socket fd max
+#define sock_fd_count_max 36864//40960 - 4096
+
+//全局变量池
+ll_elem_t[sock_fd_count_max];
+
+#endif
+
+typedef struct linklist_pos{
+  unsigned short pos;//ushort 本身最大就是65536. 
+  int sfd;
+}ll_pos_t;
+
+#define sock_fd_num_max 40960//sfd 并发量max
+
+
+
+
+
+ll_pos_t ll_index[sock_fd_num_max];
+
+
